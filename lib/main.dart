@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   get groupValue => null;
   bool _obes = true;
   Color brown = const Color.fromARGB(255, 145, 39, 0);
+  Color pink = const Color(0xFFF4DDDC);
   double weight = 0;
   // String needed = 'Isotonik (RL): \189 ml/jam =';
 
@@ -44,12 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
   int? grade;
   int? infus;
   int? idealWeight;
+  bool? predic;
   int visibleRecomendation = 0;
   int need = 0;
   int dpm = 0;
   String sDPM = "";
   String result = '';
-  var sWeight = "Berat Badan";
+  // var sWeight = ["Berat Badan", "Prediksi Berat Badan"];
+  final Uri url = Uri.parse('https://www.instagram.com/saptosutardi/');
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(30.0))),
-                      backgroundColor: const Color(0xFFF4DDDC),
+                      backgroundColor: pink,
                       title: const Text('Tentang Aplikasi ini'),
                       content: Row(children: [
                         Container(
@@ -110,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             foregroundColor:
                                 MaterialStateProperty.all<Color>(Colors.red),
                           ),
-                          onPressed: () {},
+                          onPressed: _launchUrl,
                           child: const Text('Instagram'),
                         ),
                         TextButton(
@@ -118,7 +122,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             foregroundColor:
                                 MaterialStateProperty.all<Color>(Colors.red),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context, rootNavigator: true).pop();
+                          },
                           child: const Text('Oke'),
                         ),
                       ],
@@ -194,18 +200,48 @@ class _MyHomePageState extends State<MyHomePage> {
                                           context: context,
                                           builder: (BuildContext contex) {
                                             return AlertDialog(
+                                              backgroundColor: pink,
                                               title: const Text(
                                                   "Menghitung BB ideal:"),
                                               content: TextField(
-                                                onChanged: (value) {},
                                                 controller: etHeight,
+                                                maxLength: 4,
+                                                keyboardType:
+                                                    TextInputType.number,
                                                 decoration:
                                                     const InputDecoration(
-                                                  hintText: "Tinggi Badan (cm)",
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Color.fromARGB(
+                                                            255, 145, 39, 0),
+                                                        width: 2.0),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                15.0)),
+                                                  ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Color.fromARGB(
+                                                            255, 145, 39, 0),
+                                                        width: 2.0),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                30.0)),
+                                                  ),
+                                                  labelStyle: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 145, 39, 0)),
+                                                  labelText:
+                                                      "Tinggi Badan (cm)",
+                                                  counterText: "",
                                                   suffix: Text('cm'),
                                                 ),
-                                                maxLength: 4,
                                               ),
+
                                               // TextButton(onPressed: (){}, child: Text("OK"))
                                               actions: <Widget>[
                                                 TextButton(
@@ -260,7 +296,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               Container(
                                 padding: const EdgeInsets.only(right: 18.0),
-                                child: const Text("Grade:"),
+                                child: const Text("Grade:",
+                                    style: TextStyle(fontSize: 16)),
                               ),
                               const Spacer(),
                               ToggleSwitch(
@@ -287,7 +324,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             alignment: Alignment.topLeft,
                             child: Row(
                               children: [
-                                const Text("Infus:"),
+                                const Text("Infus:",
+                                    style: TextStyle(fontSize: 16)),
                                 const Spacer(),
                                 Container(
                                   alignment: Alignment.center,
@@ -341,7 +379,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             SizedBox(
                                 height: 36,
                                 child: ElevatedButton(
-                                  onPressed: getTextInputData0,
+                                  onPressed: getTextInputData,
                                   style: ElevatedButton.styleFrom(
                                       primary: Colors.red,
                                       shape: const StadiumBorder()),
@@ -433,6 +471,32 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void getTextInputData() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: Colors.amber,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text('Modal BottomSheet'),
+                ElevatedButton(
+                  child: const Text('Close BottomSheet'),
+                  onPressed: () => Navigator.pop(context),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+/*
   void getTextInputData0() {
     setState(() {
       result = etWeightHolder.text;
@@ -459,7 +523,7 @@ class _MyHomePageState extends State<MyHomePage> {
             });
       }
     });
-  }
+  } */
 
   void getTextInputData() {
     setState(() {
@@ -498,6 +562,10 @@ class _MyHomePageState extends State<MyHomePage> {
     double idealBMI = 22;
     double idealWg = height * height * idealBMI / 10000;
     return idealWg;
+  }
+
+  void _launchUrl() {
+    launchUrl(Uri.parse(url.toString()));
   }
 }
 
