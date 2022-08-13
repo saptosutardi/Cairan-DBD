@@ -5,8 +5,12 @@ Aplikasi ini menggunakan Flutter. Tentu bisa anda implementasikan untuk Android,
 ## Cara menggunakan
 Download source code, dan siakan modifikasi
 
+
 ## Sumber
 - Aplikasi ini saya buat sendiri 
 - Rujukan: PMK No. HK.01.07/Menkes/1186/2022 Tentang Panduan Praktik Klinis bagi Dokter di Faskes Tingkat Pertama
+
+## Informasi lainnya:
+- Obesitas menggunakan berat badan ideal. Sesuai petunjuk WHO (2011)
 
 ## dr. Sapto Sutardi [Lombok Barat-NTB]
