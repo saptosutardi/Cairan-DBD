@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'ObeseDialog.dart';
+import 'globals.dart' as globals;
 
 void main() {
   runApp(const MyApp());
@@ -28,39 +30,19 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  get groupValue => null;
-  bool _obes = true;
-  Color brown = const Color.fromARGB(255, 145, 39, 0);
-  Color pink = const Color(0xFFF4DDDC);
-  double weight = 0;
-  // String needed = 'Isotonik (RL): \189 ml/jam =';
-
-  var arrGrade = ['I atau II', 'III atau IV'];
-  var arrInfus = const ['Makro-15', 'Makro-20', 'Mikro-60'];
-  final etWeightHolder = TextEditingController();
-  final etHeight = TextEditingController();
-  int? grade;
-  int? infus;
-  int? idealWeight;
-  bool? predic;
-  int visibleRecomendation = 0;
-  int need = 0;
-  int dpm = 0;
-  String sDPM = "";
-  String result = '';
-  // var sWeight = ["Berat Badan", "Prediksi Berat Badan"];
-  final Uri url = Uri.parse('https://www.instagram.com/saptosutardi/');
-
+class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // APP BAR
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: const Color(0xFFFFFBFA),
+
+        // HEADER
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
@@ -76,6 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
             // style: GoogleFonts.lato(fontStyle: FontStyle.italic)),
           ],
         ),
+
+        // ABOUT US
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.account_circle_outlined,
@@ -89,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(30.0))),
-                      backgroundColor: pink,
+                      backgroundColor: globals.pink, //
                       title: const Text('Tentang Aplikasi ini'),
                       content: Row(children: [
                         Container(
@@ -153,6 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: <Widget>[
+                        // BERAT BADAN
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -160,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               // WEIGHT
                               child: TextField(
                                 // controller: etWeightHolder,
-                                controller: etWeightHolder,
+                                controller: globals.etWeightHolder,
                                 maxLength: 4,
                                 keyboardType: TextInputType.number,
                                 decoration: const InputDecoration(
@@ -195,92 +180,31 @@ class _MyHomePageState extends State<MyHomePage> {
                                   textDirection: TextDirection.rtl,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      setState(() => _obes = !_obes);
+                                      setState(
+                                          () => globals.obes = !globals.obes);
                                       showDialog(
                                           context: context,
                                           builder: (BuildContext contex) {
-                                            return AlertDialog(
-                                              backgroundColor: pink,
-                                              title: const Text(
-                                                  "Menghitung BB ideal:"),
-                                              content: TextField(
-                                                controller: etHeight,
-                                                maxLength: 4,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Color.fromARGB(
-                                                            255, 145, 39, 0),
-                                                        width: 2.0),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                15.0)),
-                                                  ),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Color.fromARGB(
-                                                            255, 145, 39, 0),
-                                                        width: 2.0),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                30.0)),
-                                                  ),
-                                                  labelStyle: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 145, 39, 0)),
-                                                  labelText:
-                                                      "Tinggi Badan (cm)",
-                                                  counterText: "",
-                                                  suffix: Text('cm'),
-                                                ),
-                                              ),
-
-                                              // TextButton(onPressed: (){}, child: Text("OK"))
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  style: ButtonStyle(
-                                                    foregroundColor:
-                                                        MaterialStateProperty
-                                                            .all<Color>(
-                                                                Colors.red),
-                                                  ),
-                                                  onPressed: () {
-                                                    double? ideal =
-                                                        idealWeightCalc(
-                                                            etHeight);
-                                                    int idealInt =
-                                                        ideal.toInt();
-                                                    etWeightHolder.text =
-                                                        idealInt.toString();
-                                                    Navigator.pop(
-                                                        context, 'Oke');
-                                                  },
-                                                  child: const Text('Oke'),
-                                                ),
-                                              ],
-                                            );
+                                            return const ObeseDialog();
                                           });
                                     },
                                     icon: Image.asset(
                                       'assets/fat_man.png',
                                       height: 18,
                                       width: 18,
-                                      color:
-                                          _obes ? Colors.black45 : Colors.white,
+                                      color: globals.obes
+                                          ? Colors.black45
+                                          : Colors.white,
                                     ),
                                     label: const Text('Obesitas'),
                                     style: ElevatedButton.styleFrom(
-                                      primary: _obes ? Colors.black12 : brown,
+                                      primary: globals.obes
+                                          ? Colors.black12
+                                          : globals.brown,
                                       shadowColor: Colors.black12,
-                                      onPrimary:
-                                          _obes ? Colors.black54 : Colors.white,
+                                      onPrimary: globals.obes
+                                          ? Colors.black54
+                                          : Colors.white,
                                       shape: const StadiumBorder(),
                                     ),
                                   )),
@@ -303,16 +227,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               ToggleSwitch(
                                 minWidth: 90.0,
                                 cornerRadius: 20.0,
-                                activeBgColor: [brown],
+                                activeBgColor: [globals.brown],
                                 activeFgColor: Colors.white,
                                 inactiveBgColor: Colors.black12,
                                 inactiveFgColor: Colors.black54,
-                                initialLabelIndex: grade,
+                                initialLabelIndex: globals.grade,
                                 totalSwitches: 2,
-                                labels: arrGrade,
+                                labels: globals.arrGrade,
                                 radiusStyle: true,
                                 onToggle: (index) {
-                                  grade = index!;
+                                  globals.grade = index!;
                                 },
                               ),
                             ],
@@ -332,17 +256,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: ToggleSwitch(
                                     minWidth: 90.0,
                                     cornerRadius: 20.0,
-                                    activeBgColor: [brown],
+                                    activeBgColor: [globals.brown],
                                     activeFgColor: Colors.white,
                                     inactiveBgColor:
                                         const Color.fromARGB(31, 14, 12, 12),
                                     inactiveFgColor: Colors.black54,
-                                    initialLabelIndex: infus,
+                                    initialLabelIndex: globals.infus,
                                     totalSwitches: 3,
-                                    labels: arrInfus,
+                                    labels: globals.arrInfus,
                                     radiusStyle: true,
                                     onToggle: (index) {
-                                      infus = index!;
+                                      globals.infus = index!;
                                     },
                                   ),
                                 ),
@@ -362,10 +286,10 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: OutlinedButton(
                                 onPressed: () {
                                   setState(() {
-                                    grade = null;
-                                    infus = null;
-                                    etWeightHolder.text = "";
-                                    visibleRecomendation = 0;
+                                    globals.grade = null;
+                                    globals.infus = null;
+                                    globals.etWeightHolder.text = "";
+                                    globals.visibleRecomendation = 0;
                                   });
                                 },
                                 style: OutlinedButton.styleFrom(
@@ -379,7 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             SizedBox(
                                 height: 36,
                                 child: ElevatedButton(
-                                  onPressed: getTextInputData,
+                                  onPressed: getTextInputData0,
                                   style: ElevatedButton.styleFrom(
                                       primary: Colors.red,
                                       shape: const StadiumBorder()),
@@ -390,75 +314,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     )),
               ),
-
-              Container(
-                margin: const EdgeInsets.only(top: 15.0),
-                child: Column(
-                  children: <Widget>[
-                    if (visibleRecomendation == 1)
-                      const Text(
-                          'REKOMENDASI:'), // Only visible if condition is true
-                  ],
-                ),
-              ),
-
-              // REKOMENDASI
-              Column(
-                children: <Widget>[
-                  if (visibleRecomendation == 1)
-                    Card(
-                      color: const Color(0xFFF4DDDC),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              // mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                Text(
-                                  "INFUS:",
-                                  style: TextStyle(fontStyle: FontStyle.italic),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Row(children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(right: 8),
-                                    child: const Icon(
-                                      Icons.play_circle,
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                  Text("Isotonik (RL): \n$need ml/jam = "),
-                                ]),
-
-                                const Spacer(),
-
-                                // TPM = DPM
-                                Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Row(children: [
-                                      Text(
-                                        sDPM,
-                                        style: const TextStyle(
-                                            color: Colors.red, fontSize: 28),
-                                      ),
-                                      Container(
-                                          padding:
-                                              const EdgeInsets.only(left: 5),
-                                          child: const Text('TPM'))
-                                    ])),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                ],
-              )
             ]),
       ),
     );
@@ -471,38 +326,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void getTextInputData() {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: 200,
-          color: Colors.amber,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Text('Modal BottomSheet'),
-                ElevatedButton(
-                  child: const Text('Close BottomSheet'),
-                  onPressed: () => Navigator.pop(context),
-                )
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-/*
   void getTextInputData0() {
     setState(() {
-      result = etWeightHolder.text;
-      if (result.isNotEmpty) {
-        getTextInputData();
-      } else {
+      globals.result = globals.etWeightHolder.text;
+
+      if (globals.result.isEmpty ||
+          globals.grade == null ||
+          globals.infus == null) {
         showDialog(
             context: context,
             builder: (BuildContext contex) {
@@ -511,36 +341,104 @@ class _MyHomePageState extends State<MyHomePage> {
                 content: const Text("Silakan mengisi form dengan lengkap!"),
                 actions: <Widget>[
                   TextButton(
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
-                    ),
-                    onPressed: () => Navigator.pop(context, 'OK'),
                     child: const Text('Oke'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
                 ],
               );
             });
+      } else {
+        getTextInputData();
       }
     });
-  } */
+  }
 
   void getTextInputData() {
-    setState(() {
-      result = etWeightHolder.text;
-      visibleRecomendation = 1;
+    calculating();
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.pink[50],
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
+        ),
+        builder: (BuildContext build) {
+          var needs = globals.need;
+          return Container(
+            padding: const EdgeInsets.all(15),
+            child: Wrap(
+              children: [
+                Container(
+                    margin: const EdgeInsets.all(10),
+                    width: double.infinity,
+                    child: const Text(
+                      'REKOMENDASI:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    )),
+                Row(
+                  children: const [
+                    Text(
+                      "INFUS:",
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Row(children: [
+                      Container(
+                        margin: const EdgeInsets.only(right: 8),
+                        child: const Icon(
+                          Icons.play_circle,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      Text("Isotonik (RL): \n$needs need ml/jam = "),
+                    ]),
 
-      int wg = int.parse(result);
-      if (grade == 0) {
+                    const Spacer(),
+
+                    // TPM = DPM
+                    Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Row(children: [
+                          Text(
+                            globals.sDPM,
+                            style: const TextStyle(
+                                color: Colors.red, fontSize: 28),
+                          ),
+                          Container(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: const Text('TPM'))
+                        ])),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  void calculating() {
+    setState(() {
+      // result = etWeightHolder.text;
+      // visibleRecomendation = 1;
+
+      var infus = globals.infus;
+      int wg = int.parse(globals.result);
+      if (globals.grade == 0) {
         if (wg < 15) {
-          need = (wg * 7).toInt();
+          globals.need = (wg * 7).toInt();
         } else if (wg > 40) {
-          need = (wg * 3).toInt();
+          globals.need = (wg * 3).toInt();
         } else {
-          need = (wg * 5).toInt();
+          globals.need = (wg * 5).toInt();
         }
       } else {
-        need = (wg * 20).toInt();
+        globals.need = (wg * 20).toInt();
       }
 
       int dropFac;
@@ -552,8 +450,9 @@ class _MyHomePageState extends State<MyHomePage> {
         dropFac = 60;
       }
 
-      dpm = (need * dropFac) ~/ 60; //((need*dropFac)/60).toInt();
-      sDPM = dpm.toString();
+      globals.dpm =
+          (globals.need * dropFac) ~/ 60; //((need*dropFac)/60).toInt();
+      globals.sDPM = globals.dpm.toString();
     });
   }
 
@@ -565,7 +464,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _launchUrl() {
-    launchUrl(Uri.parse(url.toString()));
+    launchUrl(Uri.parse(globals.url.toString()));
   }
 }
 
