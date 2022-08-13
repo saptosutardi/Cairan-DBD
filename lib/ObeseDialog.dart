@@ -36,7 +36,7 @@ class ObeseDialog extends StatelessWidget {
             margin: const EdgeInsets.only(top: 10),
             child: const Flexible(
                 child: Text(
-                    "Khusus pasien Obesitas yang dihitung adalah BB idealnya, bukan BB sekarang",
+                    "*Khusus pasien Obesitas yang dihitung adalah BB idealnya, bukan BB sekarang",
                     style: TextStyle(fontSize: 12, color: Colors.black54))),
           )
         ],
@@ -48,11 +48,18 @@ class ObeseDialog extends StatelessWidget {
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
           ),
+          onPressed: () => Navigator.pop(context, 'Cancel'),
+          child: const Text('Batal'),
+        ),
+        TextButton(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+          ),
           onPressed: () {
             double? ideal = idealWeightCalc(globals.etHeight);
             int idealInt = ideal.toInt();
             globals.etWeightHolder.text = idealInt.toString();
-            Navigator.pop(context, 'Oke');
+            Navigator.pop(context, 'OK');
           },
           child: const Text('Oke'),
         ),
