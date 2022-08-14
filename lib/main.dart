@@ -12,8 +12,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) => MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -42,6 +40,7 @@ class MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: const Color(0xFFFFFBFA),
+        elevation: 0,
 
         // HEADER
         title: Row(
@@ -75,15 +74,13 @@ class MyHomePageState extends State<MyHomePage> {
             },
           ),
         ],
-        elevation: 0,
       ),
+
+      // BODY
       body: Container(
-        //margin: const EdgeInsets.all(0.0),
         color: const Color.fromRGBO(255, 251, 251, 100),
         padding: const EdgeInsets.all(8.0),
         child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically.
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Card(
@@ -93,180 +90,27 @@ class MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: <Widget>[
-                        // BERAT BADAN
+                        // WEIGHT INPUT
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Expanded(
-                              // WEIGHT
-                              child: TextField(
-                                // controller: etWeightHolder,
-                                controller: globals.etWeightHolder,
-                                maxLength: 4,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 145, 39, 0),
-                                        width: 2.0),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 145, 39, 0),
-                                        width: 2.0),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30.0)),
-                                  ),
-                                  labelStyle: TextStyle(
-                                      color: Color.fromARGB(255, 145, 39, 0)),
-                                  labelText: "Berat Badan (BB)", //
-                                  counterText: "",
-                                  suffix: Text('kg'),
-                                ),
-                              ),
-                            ),
+                            ExpandedTextFieldWeight(),
 
                             // OBES
-                            Container(
-                              height: 40,
-                              margin: const EdgeInsets.only(left: 8),
-                              child: Directionality(
-                                  textDirection: TextDirection.rtl,
-                                  child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      setState(
-                                          () => globals.obes = !globals.obes);
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext contex) {
-                                            return const ObeseDialog();
-                                          });
-                                    },
-                                    icon: Image.asset(
-                                      'assets/fat_man.png',
-                                      height: 18,
-                                      width: 18,
-                                      color: globals.obes
-                                          ? Colors.black45
-                                          : Colors.white,
-                                    ),
-                                    label: const Text('Obesitas'),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: globals.obes
-                                          ? Colors.black12
-                                          : globals.brown,
-                                      shadowColor: Colors.black12,
-                                      onPrimary: globals.obes
-                                          ? Colors.black54
-                                          : Colors.white,
-                                      shape: const StadiumBorder(),
-                                    ),
-                                  )),
-                            ),
+                            ContainerObes(context),
                           ],
                         ),
 
                         // GRADE
-                        Container(
-                          margin:
-                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(right: 18.0),
-                                child: const Text("Grade:",
-                                    style: TextStyle(fontSize: 16)),
-                              ),
-                              const Spacer(),
-                              ToggleSwitch(
-                                minWidth: 90.0,
-                                cornerRadius: 20.0,
-                                activeBgColor: [globals.brown],
-                                activeFgColor: Colors.white,
-                                inactiveBgColor: Colors.black12,
-                                inactiveFgColor: Colors.black54,
-                                initialLabelIndex: globals.grade,
-                                totalSwitches: 2,
-                                labels: globals.arrGrade,
-                                radiusStyle: true,
-                                onToggle: (index) {
-                                  globals.grade = index!;
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
+                        ContainerGrade(),
 
-                        // JENIS INFUS
-                        Container(
-                            alignment: Alignment.topLeft,
-                            child: Row(
-                              children: [
-                                const Text("Infus:",
-                                    style: TextStyle(fontSize: 16)),
-                                const Spacer(),
-                                Container(
-                                  alignment: Alignment.center,
-                                  child: ToggleSwitch(
-                                    minWidth: 90.0,
-                                    cornerRadius: 20.0,
-                                    activeBgColor: [globals.brown],
-                                    activeFgColor: Colors.white,
-                                    inactiveBgColor:
-                                        const Color.fromARGB(31, 14, 12, 12),
-                                    inactiveFgColor: Colors.black54,
-                                    initialLabelIndex: globals.infus,
-                                    totalSwitches: 3,
-                                    labels: globals.arrInfus,
-                                    radiusStyle: true,
-                                    onToggle: (index) {
-                                      globals.infus = index!;
-                                    },
-                                  ),
-                                ),
-                              ],
-                            )),
+                        // INFUS SET TYPE
+                        ContainerJenisInfus(),
 
                         const Divider(color: Colors.brown),
 
                         // CALCULATION
-                        Row(
-                          children: [
-                            const Spacer(),
-                            // KOSONGKAN
-                            Container(
-                              height: 36,
-                              margin: const EdgeInsets.only(right: 8.0),
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    globals.grade = null;
-                                    globals.infus = null;
-                                    globals.etWeightHolder.text = "";
-                                    globals.visibleRecomendation = 0;
-                                  });
-                                },
-                                style: OutlinedButton.styleFrom(
-                                  primary: Colors.red,
-                                  side: const BorderSide(color: Colors.red),
-                                  shape: const StadiumBorder(),
-                                ),
-                                child: const Text('Kosongkan'),
-                              ),
-                            ),
-                            SizedBox(
-                                height: 36,
-                                child: ElevatedButton(
-                                  onPressed: getTextInputData0,
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.red,
-                                      shape: const StadiumBorder()),
-                                  child: const Text('Hitung'),
-                                )),
-                          ],
-                        )
+                        MethodCalculation()
                       ],
                     )),
               ),
@@ -275,14 +119,163 @@ class MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget buildSegment(String text) {
-    return Text(
-      text,
-      style: const TextStyle(color: Colors.black),
+  Expanded ExpandedTextFieldWeight() {
+    return Expanded(
+      // WEIGHT
+      child: TextField(
+        // controller: etWeightHolder,
+        controller: globals.etWeightHolder,
+        maxLength: 4,
+        keyboardType: TextInputType.number,
+        decoration: const InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderSide:
+                BorderSide(color: Color.fromARGB(255, 145, 39, 0), width: 2.0),
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide:
+                BorderSide(color: Color.fromARGB(255, 145, 39, 0), width: 2.0),
+            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+          ),
+          labelStyle: TextStyle(color: Color.fromARGB(255, 145, 39, 0)),
+          labelText: "Berat Badan (BB)", //
+          counterText: "",
+          suffix: Text('kg'),
+        ),
+      ),
     );
   }
 
-  void getTextInputData0() {
+  Container ContainerObes(BuildContext context) {
+    return Container(
+      height: 40,
+      margin: const EdgeInsets.only(left: 8),
+      child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: ElevatedButton.icon(
+            onPressed: () {
+              setState(() => globals.obes = !globals.obes);
+              showDialog(
+                  context: context,
+                  builder: (BuildContext contex) {
+                    return const ObeseDialog();
+                  });
+            },
+            icon: Image.asset(
+              'assets/fat_man.png',
+              height: 18,
+              width: 18,
+              color: globals.obes ? Colors.black45 : Colors.white,
+            ),
+            label: const Text('Obesitas'),
+            style: ElevatedButton.styleFrom(
+              primary: globals.obes ? Colors.black12 : globals.brown,
+              shadowColor: Colors.black12,
+              onPrimary: globals.obes ? Colors.black54 : Colors.white,
+              shape: const StadiumBorder(),
+            ),
+          )),
+    );
+  }
+
+  Container ContainerJenisInfus() {
+    return Container(
+        alignment: Alignment.topLeft,
+        child: Row(
+          children: [
+            const Text("Infus:", style: TextStyle(fontSize: 16)),
+            const Spacer(),
+            Container(
+              alignment: Alignment.center,
+              child: ToggleSwitch(
+                minWidth: 90.0,
+                cornerRadius: 20.0,
+                activeBgColor: [globals.brown],
+                activeFgColor: Colors.white,
+                inactiveBgColor: const Color.fromARGB(31, 14, 12, 12),
+                inactiveFgColor: Colors.black54,
+                initialLabelIndex: globals.infus,
+                totalSwitches: 3,
+                labels: globals.arrInfus,
+                radiusStyle: true,
+                onToggle: (index) {
+                  globals.infus = index!;
+                },
+              ),
+            ),
+          ],
+        ));
+  }
+
+  Container ContainerGrade() {
+    return Container(
+      margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: const Text("Grade:", style: TextStyle(fontSize: 16)),
+          ),
+          const Spacer(),
+          ToggleSwitch(
+            minWidth: 90.0,
+            cornerRadius: 20.0,
+            activeBgColor: [globals.brown],
+            activeFgColor: Colors.white,
+            inactiveBgColor: Colors.black12,
+            inactiveFgColor: Colors.black54,
+            initialLabelIndex: globals.grade,
+            totalSwitches: 2,
+            labels: globals.arrGrade,
+            radiusStyle: true,
+            onToggle: (index) {
+              globals.grade = index!;
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Row MethodCalculation() {
+    return Row(
+      children: [
+        const Spacer(),
+        // KOSONGKAN
+        Container(
+          height: 36,
+          margin: const EdgeInsets.only(right: 8.0),
+          child: OutlinedButton(
+            onPressed: () {
+              setState(() {
+                globals.grade = null;
+                globals.infus = null;
+                globals.etWeightHolder.text = "";
+                globals.visibleRecomendation = 0;
+              });
+            },
+            style: OutlinedButton.styleFrom(
+              primary: Colors.red,
+              side: const BorderSide(color: Colors.red),
+              shape: const StadiumBorder(),
+            ),
+            child: const Text('Kosongkan'),
+          ),
+        ),
+        SizedBox(
+            height: 36,
+            child: ElevatedButton(
+              onPressed: InputValidation,
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.red, shape: const StadiumBorder()),
+              child: const Text('Hitung'),
+            )),
+      ],
+    );
+  }
+
+  void InputValidation() {
     setState(() {
       globals.result = globals.etWeightHolder.text;
 
@@ -306,13 +299,13 @@ class MyHomePageState extends State<MyHomePage> {
               );
             });
       } else {
-        getTextInputData();
+        BottomSheetResult();
       }
     });
   }
 
-  void getTextInputData() {
-    calculating();
+  void BottomSheetResult() {
+    Calculating();
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.pink[50],
@@ -378,7 +371,7 @@ class MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void calculating() {
+  void Calculating() {
     setState(() {
       // result = etWeightHolder.text;
       // visibleRecomendation = 1;
@@ -410,26 +403,5 @@ class MyHomePageState extends State<MyHomePage> {
           (globals.need * dropFac) ~/ 60; //((need*dropFac)/60).toInt();
       globals.sDPM = globals.dpm.toString();
     });
-  }
-
-  double idealWeightCalc(TextEditingController etHeight) {
-    double height = double.parse(etHeight.text); // in cm
-    double idealBMI = 22;
-    double idealWg = height * height * idealBMI / 10000;
-    return idealWg;
-  }
-}
-
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {
-        debugPrint('Received click');
-      },
-      child: const Text('Click Me'),
-    );
   }
 }
