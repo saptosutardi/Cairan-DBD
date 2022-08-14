@@ -1,16 +1,16 @@
-# flutter_application_1
+# Aplikasi menghitung cairan untuk pasien Demam Berdarah Dengue (DBD)
 
-A new Flutter project.
+Aplikasi ini menggunakan Flutter. Tentu bisa anda implementasikan untuk Android, iOS, Web, maupun Window Desktop
 
-## Getting Started
+## Cara menggunakan
+Download source code, dan siakan modifikasi
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Sumber
+- Aplikasi ini saya buat sendiri 
+- Rujukan: PMK No. HK.01.07/Menkes/1186/2022 Tentang Panduan Praktik Klinis bagi Dokter di Faskes Tingkat Pertama
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Informasi lainnya:
+- Obesitas menggunakan berat badan ideal. Sesuai petunjuk WHO (2011)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## dr. Sapto Sutardi [Lombok Barat-NTB]
