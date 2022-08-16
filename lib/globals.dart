@@ -21,6 +21,7 @@ int visibleRecomendation = 0;
 int need = 0;
 int dpm = 0;
 String sDPM = "";
+String dpmOrImmediately = "";
 String result = '';
 // var sWeight = ["Berat Badan", "Prediksi Berat Badan"];
 final Uri url = Uri.parse('https://www.instagram.com/saptosutardi/');

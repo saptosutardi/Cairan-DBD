@@ -59,7 +59,7 @@ class ObeseDialog extends StatelessWidget {
             double? ideal = idealWeightCalc(globals.etHeight);
             int idealInt = ideal.toInt();
             globals.etWeightHolder.text = idealInt.toString();
-            Navigator.pop(context, 'OK');
+            Navigator.of(context).pop(idealInt);
           },
           child: const Text('Oke'),
         ),

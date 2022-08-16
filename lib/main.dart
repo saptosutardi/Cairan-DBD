@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/AboutUsDialog.dart';
 import 'package:flutter_application_1/ObeseDialog.dart';
+import 'package:flutter_application_1/ObeseContainer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import 'WeightTextField.dart';
 import 'globals.dart' as globals;
 
 void main() {
@@ -94,23 +96,24 @@ class MyHomePageState extends State<MyHomePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            ExpandedTextFieldWeight(),
-
+                            // expandedTextFieldWeight(),
+                            WeightTextField(),
                             // OBES
-                            ContainerObes(context),
+                            containerObes(context),
+                            // ObeseContainer(context),
                           ],
                         ),
 
                         // GRADE
-                        ContainerGrade(),
+                        containerGrade(),
 
                         // INFUS SET TYPE
-                        ContainerJenisInfus(),
+                        containerJenisInfus(),
 
                         const Divider(color: Colors.brown),
 
                         // CALCULATION
-                        MethodCalculation()
+                        methodCalculation()
                       ],
                     )),
               ),
@@ -119,7 +122,7 @@ class MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Expanded ExpandedTextFieldWeight() {
+  Expanded expandedTextFieldWeight() {
     return Expanded(
       // WEIGHT
       child: TextField(
@@ -127,40 +130,42 @@ class MyHomePageState extends State<MyHomePage> {
         controller: globals.etWeightHolder,
         maxLength: 4,
         keyboardType: TextInputType.number,
-        decoration: const InputDecoration(
-          focusedBorder: OutlineInputBorder(
+        decoration: InputDecoration(
+          focusedBorder: const OutlineInputBorder(
             borderSide:
                 BorderSide(color: Color.fromARGB(255, 145, 39, 0), width: 2.0),
             borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
             borderSide:
                 BorderSide(color: Color.fromARGB(255, 145, 39, 0), width: 2.0),
             borderRadius: BorderRadius.all(Radius.circular(30.0)),
           ),
-          labelStyle: TextStyle(color: Color.fromARGB(255, 145, 39, 0)),
-          labelText: "Berat Badan (BB)", //
+          labelStyle: const TextStyle(color: Color.fromARGB(255, 145, 39, 0)),
+          labelText:
+              "Berat Badan (BB) ${globals.etWeightHolder.text.isNotEmpty ? 'Ideal' : ''}", //
           counterText: "",
-          suffix: Text('kg'),
+          suffix: const Text('kg'),
         ),
       ),
     );
   }
 
-  Container ContainerObes(BuildContext context) {
+  Container containerObes(BuildContext context) {
     return Container(
       height: 40,
       margin: const EdgeInsets.only(left: 8),
       child: Directionality(
           textDirection: TextDirection.rtl,
           child: ElevatedButton.icon(
-            onPressed: () {
+            onPressed: () async {
               setState(() => globals.obes = !globals.obes);
-              showDialog(
+              await showDialog(
                   context: context,
                   builder: (BuildContext contex) {
                     return const ObeseDialog();
                   });
+              setState(() {});
             },
             icon: Image.asset(
               'assets/fat_man.png',
@@ -179,7 +184,7 @@ class MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Container ContainerJenisInfus() {
+  Container containerJenisInfus() {
     return Container(
         alignment: Alignment.topLeft,
         child: Row(
@@ -208,7 +213,7 @@ class MyHomePageState extends State<MyHomePage> {
         ));
   }
 
-  Container ContainerGrade() {
+  Container containerGrade() {
     return Container(
       margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
@@ -238,7 +243,7 @@ class MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Row MethodCalculation() {
+  Row methodCalculation() {
     return Row(
       children: [
         const Spacer(),
@@ -266,7 +271,7 @@ class MyHomePageState extends State<MyHomePage> {
         SizedBox(
             height: 36,
             child: ElevatedButton(
-              onPressed: InputValidation,
+              onPressed: inputValidation,
               style: ElevatedButton.styleFrom(
                   primary: Colors.red, shape: const StadiumBorder()),
               child: const Text('Hitung'),
@@ -275,7 +280,7 @@ class MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void InputValidation() {
+  void inputValidation() {
     setState(() {
       globals.result = globals.etWeightHolder.text;
 
@@ -299,13 +304,13 @@ class MyHomePageState extends State<MyHomePage> {
               );
             });
       } else {
-        BottomSheetResult();
+        bottomSheetResult();
       }
     });
   }
 
-  void BottomSheetResult() {
-    Calculating();
+  void bottomSheetResult() {
+    calculating();
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.pink[50],
@@ -352,7 +357,7 @@ class MyHomePageState extends State<MyHomePage> {
 
                     // TPM = DPM
                     Align(
-                        alignment: Alignment.bottomCenter,
+                        alignment: Alignment.bottomRight,
                         child: Row(children: [
                           Text(
                             globals.sDPM,
@@ -361,7 +366,7 @@ class MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                               padding: const EdgeInsets.only(left: 5),
-                              child: const Text('TPM'))
+                              child: Text(globals.dpmOrImmediately))
                         ])),
                   ],
                 ),
@@ -371,7 +376,7 @@ class MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void Calculating() {
+  void calculating() {
     setState(() {
       // result = etWeightHolder.text;
       // visibleRecomendation = 1;
@@ -386,8 +391,10 @@ class MyHomePageState extends State<MyHomePage> {
         } else {
           globals.need = (wg * 5).toInt();
         }
+        globals.dpmOrImmediately = "TPM";
       } else {
         globals.need = (wg * 20).toInt();
+        globals.dpmOrImmediately = "ml SECEPA";
       }
 
       int dropFac;
