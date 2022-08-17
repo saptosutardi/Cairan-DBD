@@ -17,6 +17,7 @@ int? grade;
 int? infus;
 int? idealWeight;
 bool? predic;
+bool? isWeightTFFocused;
 int visibleRecomendation = 0;
 int need = 0;
 int dpm = 0;

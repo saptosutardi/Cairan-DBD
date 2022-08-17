@@ -53,13 +53,16 @@ class ObeseDialog extends StatelessWidget {
         ),
         TextButton(
           style: ButtonStyle(
+            //
             foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
           ),
           onPressed: () {
             double? ideal = idealWeightCalc(globals.etHeight);
             int idealInt = ideal.toInt();
-            globals.etWeightHolder.text = idealInt.toString();
+            globals.idealWeight = idealInt;
+            globals.etWeightHolder.text = globals.idealWeight.toString();
             Navigator.of(context).pop(idealInt);
+            print("==> ideal = " + idealInt.toString());
           },
           child: const Text('Oke'),
         ),

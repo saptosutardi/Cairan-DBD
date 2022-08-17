@@ -25,8 +25,10 @@ class WeightTextField extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(30.0)),
           ),
           labelStyle: const TextStyle(color: Color.fromARGB(255, 145, 39, 0)),
-          labelText:
-              "Berat Badan (BB) ${globals.etWeightHolder.text.isNotEmpty ? 'Ideal' : ''}", //
+          // labelText:
+          // "Berat Badan (BB) ${globals.etWeightHolder.text.isNotEmpty ? 'Ideal' : ''}",
+
+          labelText: "Berat Badan (BB) : ${globals.idealWeight}",
           counterText: "",
           suffix: const Text('kg'),
         ),
