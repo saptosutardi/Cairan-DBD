@@ -6,10 +6,15 @@ class WeightTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // var tap = globals.isWeightTFFocused;
     return Expanded(
       // WEIGHT
       child: TextField(
-        // controller: etWeightHolder,
+        /* onTap: () {
+          tap = true;
+          print('clicked');
+          globals.obes = false;
+        }, */
         controller: globals.etWeightHolder,
         maxLength: 4,
         keyboardType: TextInputType.number,
@@ -25,10 +30,10 @@ class WeightTextField extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(30.0)),
           ),
           labelStyle: const TextStyle(color: Color.fromARGB(255, 145, 39, 0)),
-          // labelText:
+          labelText:
+              "Berat Badan (BB), obes: ${globals.obes == true ? 'Obes' : 'Tidak obes'}",
           // "Berat Badan (BB) ${globals.etWeightHolder.text.isNotEmpty ? 'Ideal' : ''}",
-
-          labelText: "Berat Badan (BB) : ${globals.idealWeight}",
+          // labelText: "Berat Badan (BB) : ${globals.idealWeight} = $tap ",
           counterText: "",
           suffix: const Text('kg'),
         ),

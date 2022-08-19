@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/AboutUsDialog.dart';
 import 'package:flutter_application_1/ObeseDialog.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:toggle_switch/toggle_switch.dart';
-
-import 'WeightTextField.dart';
 import 'globals.dart' as globals;
 
 class ObeseContainer extends StatefulWidget {
@@ -40,8 +35,8 @@ class ObeseContainerState extends State<ObeseContainer> {
             ),
             label: const Text('Obesitas'),
             style: ElevatedButton.styleFrom(
-              primary: globals.obes ? Colors.black12 : globals.brown,
-              shadowColor: Colors.black12,
+              primary: globals.obes ? Colors.amber : globals.brown,
+              shadowColor: Colors.blue,
               onPrimary: globals.obes ? Colors.black54 : Colors.white,
               shape: const StadiumBorder(),
             ),

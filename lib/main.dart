@@ -47,12 +47,12 @@ class MyHomePageState extends State<MyHomePage> {
         // HEADER
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
-              'Cairan ',
+              'Cairan ${globals.obes}',
               style: TextStyle(color: Colors.black87), //<-- SEE HERE
             ),
-            Text(
+            const Text(
               'DBD',
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
@@ -100,6 +100,7 @@ class MyHomePageState extends State<MyHomePage> {
                             WeightTextField(),
                             // OBES
                             containerObes(context),
+
                             // ObeseContainer(context),
                           ],
                         ),
@@ -141,14 +142,14 @@ class MyHomePageState extends State<MyHomePage> {
             icon: Image.asset(
               'assets/fat_man.png',
               height: 18,
-              width: 18,
-              color: globals.obes ? Colors.black45 : Colors.white,
+              width: 18,//
+              color: globals.obes ? Colors.white : Colors.black45,
             ),
             label: const Text('Obesitas'),
             style: ElevatedButton.styleFrom(
-              primary: globals.obes ? Colors.black12 : globals.brown,
+              primary: globals.obes ? globals.brown : Colors.black12,
               shadowColor: Colors.black12,
-              onPrimary: globals.obes ? Colors.black54 : Colors.white,
+              onPrimary: globals.obes ? Colors.white : Colors.black54,
               shape: const StadiumBorder(),
             ),
           )),
