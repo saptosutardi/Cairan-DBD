@@ -1,128 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/about_us_dialog.dart';
-import 'package:flutter_application_1/obes_container.dart';
-import 'package:flutter_application_1/infus_kind.dart';
-import 'package:flutter_application_1/container_grade.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import 'weight_text_field.dart';
 import 'globals.dart' as globals;
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) => MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Cairan DBD',
-      home: const MyHomePage(title: 'Perhitungan Carian DBD'),
-      theme: ThemeData(
-        textTheme: GoogleFonts.latoTextTheme(
-          Theme.of(context).textTheme,
-        ),
-      ));
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+class CalculationMethod extends StatefulWidget {
+  const CalculationMethod({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => MyHomePageState();
+  State<CalculationMethod> createState() => _CalculationMethodState();
 }
 
-class MyHomePageState extends State<MyHomePage> {
+class _CalculationMethodState extends State<CalculationMethod> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // APP BAR
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: const Color(0xFFFFFBFA),
-        elevation: 0,
-
-        // HEADER
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              'Cairan ',
-              style: TextStyle(color: Colors.black87), //<-- SEE HERE
-            ),
-            Text(
-              'DBD',
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
-            )
-            // style: GoogleFonts.lato(fontStyle: FontStyle.italic)),
-          ],
-        ),
-
-        // ABOUT US
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.account_circle_outlined,
-                color: Colors.black45),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return const AboutUsDialog();
-                },
-              );
-            },
-          ),
-        ],
-      ),
-
-      // BODY
-      body: Container(
-        color: const Color.fromRGBO(255, 251, 251, 100),
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Card(
-                color: const Color(0xFFF4DDDC),
-                clipBehavior: Clip.antiAlias,
-                child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        // WEIGHT INPUT
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            // WIEIGHT TEXT FIELD
-                            WeightTextField(),
-
-                            // OBES BUTTON
-                            const ObeseContainer(),
-                          ],
-                        ),
-
-                        // GRADE
-                        const ContainerGrade(),
-
-                        // INFUS SET TYPE
-                        const InfusKind(),
-
-                        const Divider(color: Colors.brown),
-
-                        // CALCULATION
-                        methodCalculation()
-                      ],
-                    )),
-              ),
-            ]),
-      ),
-    );
-  }
-
-  Row methodCalculation() {
     return Row(
       children: [
         const Spacer(),

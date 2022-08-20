@@ -2,7 +2,7 @@ import 'globals.dart' as globals;
 import 'package:flutter/material.dart';
 
 class WeightTextField extends StatelessWidget {
-  WeightTextField({Key? key}) : super(key: key);
+  const WeightTextField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -3,9 +3,14 @@ import 'package:url_launcher/url_launcher.dart';
 import 'globals.dart' as globals;
 import 'package:flutter/material.dart';
 
-class AboutUsDialog extends StatelessWidget {
+class AboutUsDialog extends StatefulWidget {
   const AboutUsDialog({Key? key}) : super(key: key);
 
+  @override
+  State<AboutUsDialog> createState() => _AboutUsDialogState();
+}
+
+class _AboutUsDialogState extends State<AboutUsDialog> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
