@@ -48,8 +48,8 @@ class ObeseDialog extends StatelessWidget {
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
           ),
-          // onPressed: () => Navigator.pop(context, 'Cancel'),
-          onPressed: () {},
+          onPressed: () => Navigator.pop(context, false),
+          // onPressed: () {},
           child: const Text('Batal'),
         ),
         TextButton(
@@ -58,12 +58,18 @@ class ObeseDialog extends StatelessWidget {
             foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
           ),
           onPressed: () {
+            if (globals.obes == false) {
+              globals.obes = true;
+              print("--> tidak obese menjadi obese");
+            }
             double? ideal = idealWeightCalc(globals.etHeight);
             int idealInt = ideal.toInt();
             globals.idealWeight = idealInt;
             globals.obes = true;
             globals.etWeightHolder.text = globals.idealWeight.toString();
-            Navigator.of(context).pop(idealInt);
+            // Navigator.of(context).pop(idealInt);
+            Navigator.of(context).pop({});
+            print("--> on pressed, obese: ${globals.obes}");
           },
           child: const Text('Oke'),
         ),

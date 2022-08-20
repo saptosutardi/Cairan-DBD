@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/AboutUsDialog.dart';
 import 'package:flutter_application_1/ObeseDialog.dart';
-import 'package:flutter_application_1/ObeseContainer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -47,12 +46,12 @@ class MyHomePageState extends State<MyHomePage> {
         // HEADER
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Text(
-              'Cairan ${globals.obes}',
+              'Cairan ',
               style: TextStyle(color: Colors.black87), //<-- SEE HERE
             ),
-            const Text(
+            Text(
               'DBD',
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
@@ -131,7 +130,7 @@ class MyHomePageState extends State<MyHomePage> {
           textDirection: TextDirection.rtl,
           child: ElevatedButton.icon(
             onPressed: () async {
-              setState(() => globals.obes = !globals.obes);
+              // setState(() => globals.obes = !globals.obes);
               await showDialog(
                   context: context,
                   builder: (BuildContext contex) {
@@ -142,7 +141,7 @@ class MyHomePageState extends State<MyHomePage> {
             icon: Image.asset(
               'assets/fat_man.png',
               height: 18,
-              width: 18,//
+              width: 18, //
               color: globals.obes ? Colors.white : Colors.black45,
             ),
             label: const Text('Obesitas'),
@@ -267,7 +266,7 @@ class MyHomePageState extends State<MyHomePage> {
                 content: const Text("Silakan mengisi form dengan lengkap!"),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('Oke'),
+                    child: Text('Oke', style: TextStyle(color: globals.brown)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

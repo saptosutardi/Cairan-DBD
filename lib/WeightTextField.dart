@@ -18,24 +18,25 @@ class WeightTextField extends StatelessWidget {
         controller: globals.etWeightHolder,
         maxLength: 4,
         keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-          focusedBorder: const OutlineInputBorder(
+        decoration: const InputDecoration(
+          focusedBorder: OutlineInputBorder(
             borderSide:
                 BorderSide(color: Color.fromARGB(255, 145, 39, 0), width: 2.0),
             borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
-          enabledBorder: const OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderSide:
                 BorderSide(color: Color.fromARGB(255, 145, 39, 0), width: 2.0),
             borderRadius: BorderRadius.all(Radius.circular(30.0)),
           ),
-          labelStyle: const TextStyle(color: Color.fromARGB(255, 145, 39, 0)),
-          labelText:
-              "Berat Badan (BB), obes: ${globals.obes == true ? 'Obes' : 'Tidak obes'}",
+          labelStyle: TextStyle(color: Color.fromARGB(255, 145, 39, 0)),
+          labelText: "Berat Badan (BB)",
+
+          // "Berat Badan (BB), obes: ${globals.obes == true ? 'Obes' : 'Tidak obes'}",
           // "Berat Badan (BB) ${globals.etWeightHolder.text.isNotEmpty ? 'Ideal' : ''}",
           // labelText: "Berat Badan (BB) : ${globals.idealWeight} = $tap ",
           counterText: "",
-          suffix: const Text('kg'),
+          suffix: Text('kg'),
         ),
       ),
     );
