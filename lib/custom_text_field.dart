@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final Color color;
-  // final String labelText;
-  // String labelText;
-
-  CustomTextField(
-      {this.color = Colors.grey,
+  const CustomTextField(
+      {Key? key,
+      this.color = Colors.grey,
       String? labelText,
       required TextEditingController controller,
       required String counterText,
-      required Text suffix});
+      required Text suffix})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

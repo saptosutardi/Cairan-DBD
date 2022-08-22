@@ -60,7 +60,7 @@ class ObeseDialog extends StatelessWidget {
           onPressed: () {
             if (globals.obes == false) {
               globals.obes = true;
-              print("--> tidak obese menjadi obese");
+              debugPrint("--> tidak obese menjadi obese");
             }
             double? ideal = idealWeightCalc(globals.etHeight);
             int idealInt = ideal.toInt();
@@ -69,7 +69,7 @@ class ObeseDialog extends StatelessWidget {
             globals.etWeightHolder.text = globals.idealWeight.toString();
             // Navigator.of(context).pop(idealInt);
             Navigator.of(context).pop({});
-            print("--> on pressed, obese: ${globals.obes}");
+            debugPrint("--> on pressed, obese: ${globals.obes}");
           },
           child: const Text('Oke'),
         ),

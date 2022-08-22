@@ -11,7 +11,18 @@ double weight = 0;
 
 var arrGrade = ['I atau II', 'III atau IV'];
 var arrInfus = const ['Makro-15', 'Makro-20', 'Mikro-60'];
-// bool isObese = true;
+var signSymp = "Gejala dan Tanda";
+var arrSignSymptomsDS = const [
+  'Demam 2-7 hari, mendadak tinggi',
+  'Perdarahan spontan: ruam kulit, perdarah gusi, dll',
+  'Nyeri kepala, Nyeri otot & tulang',
+  'Ada kasus DBD di sekitaran',
+  'Lekosit ≤ 4.000 /mm³',
+  'Trombosit < 150.000 /mm³',
+];
+
+var arrValue = [true, false, true, false, false, false];
+// var arrSignSympDBD1 =
 final etWeightHolder = TextEditingController();
 final etHeight = TextEditingController();
 int? grade;
@@ -22,8 +33,12 @@ bool? isWeightTFFocused;
 int visibleRecomendation = 0;
 int need = 0;
 int dpm = 0;
-String sDPM = "";
-String dpmOrImmediately = "";
-String result = '';
-String signSymptoms = "Gejala dan Tanda:";
+var title = "Cairan DBD";
+var sDPM = "";
+var dpmOrImmediately = "";
+var result = '';
+var signSymptoms = "Gejala dan Tanda:";
+var ok = "Oke";
+var cancel = "Batal";
+
 final Uri url = Uri.parse('https://www.instagram.com/saptosutardi/');

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/about_us_dialog.dart';
+import 'package:flutter_application_1/calculation_method.dart';
 import 'package:flutter_application_1/obes_container.dart';
 import 'package:flutter_application_1/infus_kind.dart';
 import 'package:flutter_application_1/container_grade.dart';
@@ -95,12 +96,12 @@ class MyHomePageState extends State<MyHomePage> {
                         // WEIGHT INPUT
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
+                          children: const [
                             // WIEIGHT TEXT FIELD
                             WeightTextField(),
 
                             // OBES BUTTON
-                            const ObeseContainer(),
+                            ObeseContainer(),
                           ],
                         ),
 
@@ -113,7 +114,7 @@ class MyHomePageState extends State<MyHomePage> {
                         const Divider(color: Colors.brown),
 
                         // CALCULATION
-                        methodCalculation()
+                        const CalculationMethod()
                       ],
                     )),
               ),
