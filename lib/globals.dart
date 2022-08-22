@@ -11,8 +11,8 @@ double weight = 0;
 
 var arrGrade = ['I atau II', 'III atau IV'];
 var arrInfus = const ['Makro-15', 'Makro-20', 'Mikro-60'];
-var signSymp = "Gejala dan Tanda";
-var arrSignSymptomsDS = const [
+var signSymp = "Gejala dan Tanda:";
+List<String> arrSignSymptomsDS = const [
   'Demam 2-7 hari, mendadak tinggi',
   'Perdarahan spontan: ruam kulit, perdarah gusi, dll',
   'Nyeri kepala, Nyeri otot & tulang',
@@ -21,7 +21,7 @@ var arrSignSymptomsDS = const [
   'Trombosit < 150.000 /mm³',
 ];
 
-var arrValue = [true, false, true, false, false, false];
+var arrValue = [false, false, false, false, false, false];
 // var arrSignSympDBD1 =
 final etWeightHolder = TextEditingController();
 final etHeight = TextEditingController();
@@ -37,7 +37,6 @@ var title = "Cairan DBD";
 var sDPM = "";
 var dpmOrImmediately = "";
 var result = '';
-var signSymptoms = "Gejala dan Tanda:";
 var ok = "Oke";
 var cancel = "Batal";
 
