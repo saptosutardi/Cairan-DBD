@@ -16,6 +16,7 @@ class _GradeDialogState extends State<GradeDialog> {
   int count = globals.arrSignSymptomsDS.length;
   var arrSignSymptomsDS = globals.arrSignSymptomsDS;
   var arrValue = globals.arrValue;
+  int dengueClass = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,33 +24,23 @@ class _GradeDialogState extends State<GradeDialog> {
       backgroundColor: globals.pink,
       title: Text(globals.signSymp),
       content: SizedBox(
-        // width: double.maxFinite,
+        width: double.maxFinite,
         child: Column(
           children: <Widget>[
-            SwitchListTile(
-                title: Text(arrSignSymptomsDS[0]),
-                value: arrValue[0],
-                onChanged: (val) => setState(() => arrValue[0] = val)),
-            SwitchListTile(
-                title: Text(arrSignSymptomsDS[1]),
-                value: arrValue[1],
-                onChanged: (val) => setState(() => arrValue[1] = val)),
-            SwitchListTile(
-                title: Text(arrSignSymptomsDS[2]),
-                value: arrValue[2],
-                onChanged: (val) => setState(() => arrValue[2] = val)),
-            SwitchListTile(
-                title: Text(arrSignSymptomsDS[3]),
-                value: arrValue[3],
-                onChanged: (val) => setState(() => arrValue[3] = val)),
-            SwitchListTile(
-                title: Text(arrSignSymptomsDS[4]),
-                value: arrValue[4],
-                onChanged: (val) => setState(() => arrValue[4] = val)),
-            SwitchListTile(
-                title: Text(arrSignSymptomsDS[5]),
-                value: arrValue[5],
-                onChanged: (val) => setState(() => arrValue[5] = val)),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: arrSignSymptomsDS.length,
+              itemBuilder: (context, index) {
+                return CheckboxListTile(
+                  title: Text(arrSignSymptomsDS[index]),
+                  value: arrValue[index],
+                  onChanged: (val) => setState(() => arrValue[index] = val!),
+                  // secondary: const Icon(Icons.hourglass_empty),
+                );
+
+                // Text(arrSignSymptomsDS[index]);
+              },
+            )
           ],
         ),
       ),
@@ -68,8 +59,19 @@ class _GradeDialogState extends State<GradeDialog> {
               Navigator.of(context, rootNavigator: true).pop();
               // ignore: avoid_print
               print(arrValue);
+              clasificationDengue(arrValue);
             }),
       ],
     );
+  }
+
+  void clasificationDengue(List<bool> arrValue) {
+    var addSignSymp = arrValue.sublist(1);
+    var value = addSignSymp.where((item) => item == true).length;
+    print(value.toString());
+    if (value > 1)
+      print("kasus DBD");
+    else
+      print("bukan DBD");
   }
 }
