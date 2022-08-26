@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^3.0.1
   url_launcher: ^6.1.5
   smart_select: ^4.3.2
+  parent_child_checkbox: ^0.0.3
 
 dev_dependencies:
 

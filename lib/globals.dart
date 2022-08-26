@@ -21,6 +21,14 @@ List<String> arrSignSymptomsDS = const [
   'Trombosit < 150.000 /mm³',
 ];
 
+List<String> arrSignSymptomsDBD = const [
+  'Tanda kebocoran plasma',
+  'Peningkatan hematokrit >20%',
+  'Efusi pleura',
+  'Asites',
+  'Hipoalbunemia/Hiponatremia',
+];
+
 var arrValue = [false, false, false, false, false, false];
 // var arrSignSympDBD1 =
 final etWeightHolder = TextEditingController();
@@ -30,9 +38,9 @@ int? infus;
 int? idealWeight;
 bool? predic;
 bool? isWeightTFFocused;
-int visibleRecomendation = 0;
-int need = 0;
-int dpm = 0;
+var visibleRecomendation = 0;
+var need = 0;
+var dpm = 0;
 var title = "Cairan DBD";
 var sDPM = "";
 var dpmOrImmediately = "";
