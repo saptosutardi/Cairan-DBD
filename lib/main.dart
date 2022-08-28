@@ -1,11 +1,11 @@
+import 'package:KalkukatorDBD/calculation_method.dart';
+import 'package:KalkukatorDBD/container_grade.dart';
+import 'package:KalkukatorDBD/infus_kind.dart';
+import 'package:KalkukatorDBD/obes_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/about_us_dialog.dart';
-import 'package:flutter_application_1/calculation_method.dart';
-import 'package:flutter_application_1/obes_container.dart';
-import 'package:flutter_application_1/infus_kind.dart';
-import 'package:flutter_application_1/container_grade.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'about_us_dialog.dart';
 import 'weight_text_field.dart';
 import 'globals.dart' as globals;
 

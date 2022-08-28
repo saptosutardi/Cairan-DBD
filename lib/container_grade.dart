@@ -1,6 +1,6 @@
+import 'package:KalkukatorDBD/grade_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'package:flutter_application_1/grade_dialog.dart';
 import 'globals.dart' as globals;
 
 class ContainerGrade extends StatefulWidget {
@@ -30,6 +30,7 @@ class _ContainerGradeState extends State<ContainerGrade> {
                           context: context,
                           builder: (BuildContext contex) {
                             return const GradeDialog();
+                            // return full_screen_dialog();
                           });
                       // setState(() {});
                     },

@@ -48,4 +48,41 @@ var result = '';
 var ok = "Oke";
 var cancel = "Batal";
 
+var assessment_1 = "Tinggal di/bepergian ke area endemik disertai demam";
+List<String> arrAssessment = [
+  "Mual dan muntah",
+  "Ruam",
+  "Nyeri dan pegal (nyeri kepala, nyeri mata, pegal otot, dan atau nyeri sendi",
+  "Tanda bahaya",
+  "Positif tes turniket",
+  "Leukopenia"
+];
+
+List<String> arrWarningSign = [
+  "Nyeri abdomen yang berat atau nyeri tekan",
+  "Muntah terus-menerus",
+  "Perdarahan mukosa",
+  "Pembesaran hepar >2cm",
+  "Akumulasi carian klinis",
+  "Letargi, gelisah",
+  "Peningkatan hematrokrit bersamaan dengan penururan cepat jumlah trombosit"
+];
+
+List<String> arrAddCondition = [
+  "Bayi",
+  "Diabetes melitus",
+  "Penyakit jantung bawaan",
+  "Penyakit paru kronik",
+  "Kelainan hati kronik",
+  "Penyakit hemolitik",
+  "Gagal ginjal",
+  "Kondisi sosial buruk"
+];
+
+List<String> arrCondisition = [
+  "Kebocoran plasma berat dengan syok dan/atau akumulasi cairan dengan distres nafas",
+  "Perdarahan berat",
+  "Kegagalan organ berat"
+];
+
 final Uri url = Uri.parse('https://www.instagram.com/saptosutardi/');

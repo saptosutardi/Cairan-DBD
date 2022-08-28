@@ -1,5 +1,5 @@
+import 'package:KalkukatorDBD/obese_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/obese_dialog.dart';
 import 'globals.dart' as globals;
 
 class ObeseContainer extends StatefulWidget {
