@@ -48,7 +48,7 @@ var result = '';
 var ok = "Oke";
 var cancel = "Batal";
 
-var assessment_1 = "Tinggal di/bepergian ke area endemik disertai demam";
+var assessmentHeader = "Tinggal di/bepergian ke area endemik disertai demam";
 List<String> arrAssessment = [
   "Mual dan muntah",
   "Ruam",

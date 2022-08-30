@@ -4,7 +4,6 @@
 // import 'package:parent_child_checkbox/parent_child_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart' as globals;
-import 'dart:developer';
 
 class GradeDialog extends StatefulWidget {
   const GradeDialog({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class GradeDialog extends StatefulWidget {
 class _GradeDialogState extends State<GradeDialog> {
   bool lights = false;
   int count = globals.arrSignSymptomsDS.length;
-  var arrSignSymptomsDS = globals.arrSignSymptomsDS;
+  var arrSignSymptomsDS = globals.arrAssessment;
   var arrValue = globals.arrValue;
 
   @override
@@ -84,11 +83,5 @@ class _GradeDialogState extends State<GradeDialog> {
         )
       ],
     );
-  }
-
-  setText(String s, String t, String u, String v) {
-    for (int i = 0; i < 5; i++) {
-      print(i);
-    }
   }
 }
