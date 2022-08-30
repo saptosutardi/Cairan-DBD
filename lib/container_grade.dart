@@ -25,13 +25,14 @@ class _ContainerGradeState extends State<ContainerGrade> {
                   IconButton(
                     icon: const Icon(Icons.help),
                     color: Colors.red,
-                    onPressed: () async {
-                      await showDialog(
+                    onPressed: () {
+                      _showDialog(3);
+                      /* await showDialog(
                           context: context,
                           builder: (BuildContext contex) {
                             return const GradeDialog();
                             // return full_screen_dialog();
-                          });
+                          }); */
                       // setState(() {});
                     },
                   )
@@ -57,4 +58,15 @@ class _ContainerGradeState extends State<ContainerGrade> {
       ),
     );
   }
+
+  /*  void _showDialog(int count) async {
+    if (count <= 0) {
+      return;
+    } else {
+      await showDialog(context: context, builder: (_) => AlertDialog(
+        
+      ));
+      _showDialog(--count);
+    }
+  } */
 }
